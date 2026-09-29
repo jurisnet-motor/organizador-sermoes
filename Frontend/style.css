@@ -1126,3 +1126,20 @@ svg {
         font-size: 20px;
     }
 }
+
+/* Link para orientações importantes */
+/* Link para orientações importantes */
+.link-orientacoes {
+    display: block;
+    width: fit-content;
+    margin: 7px auto 0;
+    color: #f05a00;
+    font-size: 14px;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.link-orientacoes:hover {
+    color: #c94700;
+    text-decoration: underline;
+}

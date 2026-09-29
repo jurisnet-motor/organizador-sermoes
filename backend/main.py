@@ -1,12 +1,16 @@
 import os
 import re
+
 from io import BytesIO
 
 from dotenv import load_dotenv
+
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import StreamingResponse
+
 from pydantic import BaseModel
+
 from openai import OpenAI
 
 from docx import Document
@@ -163,57 +167,75 @@ de memorizar.
 18. Ao final, faça uma conclusão curta e um fechamento
 avivado relacionado ao texto-base e aos tópicos.
 
-19. Não faça introdução longa.
+19. Antes do primeiro tópico principal, faça SEMPRE uma
+INTRODUÇÃO breve, objetiva e diretamente relacionada ao
+tema e ao texto-base.
 
-20. Não explique estas regras na resposta.
+20. A INTRODUÇÃO deve apresentar resumidamente o contexto
+bíblico imediato do texto-base e, quando forem pertinentes
+e historicamente seguros, elementos históricos e culturais
+que auxiliem na compreensão da passagem.
 
-21. NÃO utilize emojis, ícones, desenhos ou símbolos
+21. A INTRODUÇÃO deve situar o ouvinte no texto e preparar
+naturalmente a passagem para as premissas do sermão.
+
+22. Não transforme a INTRODUÇÃO em estudo acadêmico,
+comentário extenso ou exposição excessivamente longa.
+
+23. Não invente informações históricas, culturais,
+geográficas, arqueológicas ou contextuais. Quando não
+houver segurança suficiente sobre determinada informação,
+não a apresente como fato.
+
+24. Não explique estas regras na resposta.
+
+25. NÃO utilize emojis, ícones, desenhos ou símbolos
 decorativos em nenhuma parte do esboço.
 
-22. NÃO escreva as palavras "TÍTULO", "TÍTULO DO SERMÃO"
+26. NÃO escreva as palavras "TÍTULO", "TÍTULO DO SERMÃO"
 ou expressões semelhantes antes do título.
 
-23. Apresente diretamente o título informado pelo usuário.
+27. Apresente diretamente o título informado pelo usuário.
 
-24. Utilize negrito Markdown exatamente nos elementos
+28. Utilize negrito Markdown exatamente nos elementos
 estruturais indicados no modelo abaixo.
 
-25. Não coloque em negrito todo o texto das subpremissas,
+29. Não coloque em negrito todo o texto das subpremissas,
 referências ou aplicações. Somente os respectivos rótulos
 e os tópicos principais devem receber destaque.
 
-26. Cada subpremissa deve nascer diretamente da lógica da
+30. Cada subpremissa deve nascer diretamente da lógica da
 premissa principal. Não crie pensamentos apenas relacionados
 ao tema geral do sermão.
 
-27. Antes de escolher uma referência bíblica, verifique se
+31. Antes de escolher uma referência bíblica, verifique se
 o texto citado realmente sustenta a afirmação da subpremissa.
 
-28. Prefira referências bíblicas claras e diretamente
+32. Prefira referências bíblicas claras e diretamente
 relacionadas à afirmação. Evite associações bíblicas distantes,
 forçadas ou apenas temáticas.
 
-29. A referência bíblica não deve servir apenas como
+33. A referência bíblica não deve servir apenas como
 ornamento. Ela deve funcionar como fundamento da subpremissa.
 
-30. Não atribua ao texto-base uma afirmação que ele não faz.
+34. Não atribua ao texto-base uma afirmação que ele não faz.
 
-31. Diferencie claramente aquilo que o texto bíblico afirma
+35. Diferencie claramente aquilo que o texto bíblico afirma
 daquilo que é aplicação homilética.
 
-32. A Aplicação avivada deve nascer da premissa e das
+36. A Aplicação avivada deve nascer da premissa e das
 subpremissas apresentadas. Não introduza na aplicação uma
 nova doutrina, acontecimento ou afirmação que não tenha sido
 fundamentada no tópico.
 
-33. Evite frases religiosas genéricas que poderiam ser usadas
+37. Evite frases religiosas genéricas que poderiam ser usadas
 em qualquer sermão. A aplicação deve ser específica para o
 tópico desenvolvido.
 
-34. O modo avivado deve aparecer na força, urgência e
+38. O modo avivado deve aparecer na força, urgência e
 memorização da linguagem, sem sacrificar a precisão bíblica.
 
-35. Quando houver dúvida sobre a adequação de uma referência,
+39. Quando houver dúvida sobre a adequação de uma referência,
 prefira uma referência mais diretamente relacionada ou não
 amplie a afirmação.
 
@@ -223,6 +245,13 @@ FORMATO OBRIGATÓRIO DA RESPOSTA
 # {dados.titulo}
 
 **Texto-base:** {dados.texto_base}
+
+## INTRODUÇÃO
+
+Introdução breve e objetiva, relacionada ao tema e ao texto-base,
+apresentando resumidamente o contexto bíblico e, quando pertinente
+e seguro, elementos históricos e culturais que auxiliem na
+compreensão da passagem.
 
 1. **{dados.premissas[0] if dados.premissas else "Primeira premissa"}**
 
@@ -264,6 +293,8 @@ Não utilize emojis.
 
 Não utilize ícones.
 
+Crie apenas UMA introdução, antes do primeiro tópico.
+
 Não crie mais nem menos tópicos do que a quantidade
 solicitada.
 
@@ -279,6 +310,7 @@ Cada tópico deve possuir EXATAMENTE duas subpremissas.
 
 @app.get("/")
 def inicio():
+
     return {
         "status": "online",
         "app": "Organizador de Esboço de Sermões"
@@ -293,18 +325,21 @@ def inicio():
 def gerar_esboco(dados: PedidoSermao):
 
     if not api_key or api_key == "SUA_CHAVE_AQUI":
+
         raise HTTPException(
             status_code=500,
             detail="A chave da API ainda não foi configurada."
         )
 
     if dados.quantidade_topicos < 1:
+
         raise HTTPException(
             status_code=400,
             detail="A quantidade de tópicos deve ser maior que zero."
         )
 
     if len(dados.premissas) != dados.quantidade_topicos:
+
         raise HTTPException(
             status_code=400,
             detail=(
@@ -314,7 +349,9 @@ def gerar_esboco(dados: PedidoSermao):
         )
 
     for premissa in dados.premissas:
+
         if not premissa.strip():
+
             raise HTTPException(
                 status_code=400,
                 detail="Todas as premissas devem ser preenchidas."
@@ -329,6 +366,10 @@ def gerar_esboco(dados: PedidoSermao):
             instructions=(
                 "Siga rigorosamente as regras de organização "
                 "homilética e de formatação fornecidas. "
+                "Faça sempre uma introdução breve antes dos tópicos, "
+                "relacionada ao tema e ao texto-base, incluindo contexto "
+                "bíblico e, quando pertinente e seguro, elementos "
+                "históricos e culturais. "
                 "Respeite exatamente a quantidade de tópicos "
                 "e produza exatamente duas subpremissas por tópico. "
                 "Não utilize emojis ou ícones."
@@ -361,12 +402,14 @@ def gerar_esboco(dados: PedidoSermao):
 def sugerir_premissas(dados: PedidoSugestao):
 
     if not api_key or api_key == "SUA_CHAVE_AQUI":
+
         raise HTTPException(
             status_code=500,
             detail="A chave da API ainda não foi configurada."
         )
 
     if dados.quantidade_topicos < 1:
+
         raise HTTPException(
             status_code=400,
             detail="A quantidade de tópicos deve ser maior que zero."
@@ -442,6 +485,7 @@ Retorne EXATAMENTE {dados.quantidade_topicos} premissas.
 def exportar_word(dados: PedidoExportacao):
 
     try:
+
         documento = Document()
 
         # -------------------------------------------------
@@ -498,6 +542,22 @@ def exportar_word(dados: PedidoExportacao):
                 run.bold = True
                 run.font.name = "Calibri"
                 run.font.size = Pt(14)
+
+                continue
+
+            # ---------------------------------------------
+            # INTRODUÇÃO
+            # ---------------------------------------------
+
+            if linha.upper() == "INTRODUÇÃO":
+
+                paragrafo = documento.add_paragraph()
+
+                run = paragrafo.add_run("INTRODUÇÃO")
+
+                run.bold = True
+                run.font.name = "Calibri"
+                run.font.size = Pt(12)
 
                 continue
 
