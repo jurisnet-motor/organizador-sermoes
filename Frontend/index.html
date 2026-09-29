@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Organizador de Esboço de Sermões</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <main class="container">
+
+        <!-- =====================================================
+             CABEÇALHO
+        ====================================================== -->
+
+        <header class="cabecalho">
+
+            <div class="marca">
+                <span class="marca-linha"></span>
+
+                <div>
+                    <h1>Organizador de Esboço de Sermões</h1>
+
+                    <p class="subtitulo">
+                        Da premissa ao púlpito, com organização e fidelidade ao texto bíblico.
+                    </p>
+                </div>
+            </div>
+
+        </header>
+
+
+        <!-- =====================================================
+             FORMULÁRIO
+        ====================================================== -->
+
+        <section class="formulario">
+
+            <div class="cabecalho-formulario">
+                <h2>Prepare seu esboço</h2>
+
+                <p>
+                    Informe o texto bíblico e suas premissas.
+                    A IA organiza o desenvolvimento do sermão.
+                </p>
+            </div>
+
+
+            <!-- TEXTO-BASE + TÍTULO -->
+
+            <div class="linha-campos">
+
+                <div class="campo">
+                    <label for="textoBase">
+                        Texto-base
+                    </label>
+
+                    <input
+                        type="text"
+                        id="textoBase"
+                        placeholder="Ex.: Apocalipse 22.20"
+                    >
+                </div>
+
+
+                <div class="campo">
+                    <label for="titulo">
+                        Título do sermão
+                    </label>
+
+                    <input
+                        type="text"
+                        id="titulo"
+                        placeholder="Ex.: A certeza da volta de Jesus"
+                    >
+                </div>
+
+            </div>
+
+
+            <!-- QUANTIDADE DE TÓPICOS -->
+
+            <div class="campo campo-quantidade">
+
+                <label for="quantidadeTopicos">
+                    Quantidade de tópicos/premissas
+                </label>
+
+                <select id="quantidadeTopicos">
+
+                    <option value="1">
+                        1 tópico
+                    </option>
+
+                    <option value="2">
+                        2 tópicos
+                    </option>
+
+                    <option value="3" selected>
+                        3 tópicos
+                    </option>
+
+                    <option value="4">
+                        4 tópicos
+                    </option>
+
+                    <option value="5">
+                        5 tópicos
+                    </option>
+
+                    <option value="6">
+                        6 tópicos
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <!-- PREMISSAS -->
+
+            <div class="secao-premissas">
+
+                <div class="titulo-secao">
+                    <span>Premissas do sermão</span>
+
+                    <small>
+                        Você pode escrever ou pedir sugestões.
+                    </small>
+                </div>
+
+
+                <!-- CAMPOS CRIADOS PELO JAVASCRIPT -->
+
+                <div id="premissasContainer"></div>
+
+            </div>
+
+
+            <!-- CRIADOR -->
+
+            <div class="campo campo-criador">
+
+                <label for="criador">
+                    Nome do criador
+                </label>
+
+                <input
+                    type="text"
+                    id="criador"
+                    placeholder="Ex.: Pr. Tal"
+                >
+
+            </div>
+
+
+            <!-- BOTÕES -->
+
+            <div class="acoes-formulario">
+
+                <button
+                    type="button"
+                    id="btnSugerir"
+                    class="botao-secundario"
+                >
+                    Sugerir premissas
+                </button>
+
+
+                <button
+                    type="button"
+                    id="btnGerar"
+                    class="botao-principal"
+                >
+                    GERAR ESBOÇO
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             RESULTADO
+        ====================================================== -->
+
+        <section
+            id="resultado"
+            class="resultado"
+            style="display: none;"
+        >
+
+            <div class="cabecalho-resultado">
+
+                <div>
+                    <span class="resultado-etiqueta">
+                        Esboço pronto
+                    </span>
+
+                    <h2>Esboço Gerado</h2>
+                </div>
+
+            </div>
+
+
+            <!-- TEXTO DO ESBOÇO -->
+
+            <div
+                id="conteudoResultado"
+                class="conteudo-resultado"
+            ></div>
+
+
+            <!-- EXPORTAR PARA WORD -->
+
+            <div class="acoes-resultado">
+
+                <button
+                    type="button"
+                    id="btnExportarWord"
+                    class="botao-principal"
+                    style="display: none;"
+                >
+                    EXPORTAR PARA WORD
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             RODAPÉ
+        ====================================================== -->
+
+        <footer class="rodape">
+    <p>© 2026 RAETec Business. Todos os direitos reservados.</p>
+    <p>Contato: raetecbusiness@gmail.com</p>
+</footer>
+
+    </main>
+
+
+    <!-- JAVASCRIPT -->
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
