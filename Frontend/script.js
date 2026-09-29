@@ -1,4 +1,4 @@
-const API_URL = "http://127.0.0.1:8000";
+const API_URL = "https://organizador-sermoes.onrender.com";
 
 const quantidadeTopicos = document.getElementById("quantidadeTopicos");
 const premissasContainer = document.getElementById("premissasContainer");
