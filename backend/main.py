@@ -239,6 +239,21 @@ memorização da linguagem, sem sacrificar a precisão bíblica.
 prefira uma referência mais diretamente relacionada ou não
 amplie a afirmação.
 
+40. Quando envolver personagem bíblico, na introdução, deve falar um pouco sobre ele, como significado do nome, particularidades, etc, usando contexto bíblico e artigos e textos da Rede.
+
+41. SEMPRE coloque na introdução a data, o local onde ocorreu o fato.
+
+42. Sempre que uma premissa ou subpremissa apresentar referência bíblica com versículos bíblicos externas ao texto-base principal, TRANSCREVA INTEGRALMENTE os versículos correspondentes, logo abaixo da referência, identificando o livro, capítulo, versículos e versão bíblica utilizada. NUNCA DEIXE DE FAZER ISSO.
+Quando houver mais de uma passagem complementar, apresente cada uma separadamente.
+Preserve a redação fiel da tradução utilizada. Não invente versículos nem apresente paráfrases como transcrições literais.
+As referências pertencentes ao texto-base principal poderão permanecer apenas indicadas, sem necessidade de transcrição.
+
+43. Utilize prioritariamente o texto-base para desenvolver as premissas e subpremissas.
+Sempre que necessário para fundamentar, esclarecer ou fortalecer uma premissa, busque referências bíblicas complementares em outros capítulos ou livros da Bíblia, utilizando até três passagens por premissa principal, considerando suas duas subpremissas.
+Selecione somente passagens que sustentem diretamente a afirmação apresentada, respeitando o contexto bíblico e evitando associações forçadas.
+Sempre que utilizar versículos externos ao texto-base, transcreva-os integralmente logo abaixo da respectiva referência, identificando livro, capítulo, versículos e tradução utilizada.
+Não acrescente referências apenas para atingir o limite de três. Se o texto-base já fundamentar suficientemente a premissa, não será necessário buscar outras passagens.
+Não invente referências ou transcrições. Quando não houver segurança sobre a redação literal, não apresente paráfrases como citações bíblicas.
 
 FORMATO OBRIGATÓRIO DA RESPOSTA
 
@@ -259,9 +274,19 @@ compreensão da passagem.
 
 **Referência bíblica:** referência ou referências adequadas.
 
+**Texto bíblico complementar:** transcreva aqui, quando houver,
+o texto integral de cada passagem citada fora do texto-base,
+identificando sua referência e tradução.
+Se não houver passagem externa, omita esta linha.
+
 **Subpremissa 2:** desenvolvimento curto e lógico.
 
 **Referência bíblica:** referência ou referências adequadas.
+
+**Texto bíblico complementar:** transcreva aqui, quando houver,
+o texto integral de cada passagem citada fora do texto-base,
+identificando sua referência e tradução.
+Se não houver passagem externa, omita esta linha.
 
 **Aplicação avivada:** aplicação curta, forte e memorizável.
 
@@ -435,7 +460,7 @@ Cada premissa deverá:
 - possuir uma ideia própria;
 - ser curta;
 - ser clara;
-- ser forte e apropriada para pregação;
+- ser forte, convincente e apropriada para pregação;
 - permitir o desenvolvimento posterior de duas subpremissas;
 - contribuir para uma sequência lógica entre os tópicos.
 
@@ -604,7 +629,8 @@ def exportar_word(dados: PedidoExportacao):
                 "Referência bíblica:",
                 "Aplicação avivada:",
                 "Conclusão:",
-                "Fechamento avivado:"
+                "Fechamento avivado:",
+                "Texto bíblico complementar:",
             ]
 
             encontrou = False
